@@ -26,6 +26,12 @@ class PlacesController
         return response()->json($this->placesService->get(), 200);
     }
 
+    public function getPlaceByName(Request $request): JsonResponse
+    {
+        $name = $request->query('name');
+        return response()->json($this->placesService->getPlaceByName($name), 200);
+    }
+
     public function retrieve(int $id): JsonResponse
     {
         return response()->json($this->placesService->retrieve($id), 200);
