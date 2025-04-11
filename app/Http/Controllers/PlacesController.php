@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\PlacesService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PlacesController
 {
@@ -33,5 +34,12 @@ class PlacesController
     public function update(int $id, Request $request): JsonResponse
     {
         return response()->json($this->placesService->update($id, $request->all()), 200);
+    }
+
+    public function destroy(int $id): Response
+    {
+        $this->placesService->destroy($id);
+
+        return response()->noContent();
     }
 }

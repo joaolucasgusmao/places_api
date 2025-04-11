@@ -44,4 +44,16 @@ class PlacesService
         $place->update($data);
         return $place;
     }
+
+
+    public function destroy(int $id): void
+    {
+        $place = Place::find($id);
+
+        if (!$place) {
+            throw new AppError("Place not found.", 404);
+        }
+
+        $place->delete();
+    }
 }
