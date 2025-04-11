@@ -24,4 +24,9 @@ class PlacesController
     {
         return response()->json($this->placesService->get(), 200);
     }
+
+    public function update(int $id, Request $request): JsonResponse
+    {
+        return response()->json($this->placesService->update($id, $request->all()), 200);
+    }
 }
