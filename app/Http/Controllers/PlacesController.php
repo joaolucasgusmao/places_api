@@ -19,4 +19,9 @@ class PlacesController
     {
         return response()->json($this->placesService->store($request->all()), 201);
     }
+
+    public function get(): JsonResponse
+    {
+        return response()->json($this->placesService->get(), 200);
+    }
 }
