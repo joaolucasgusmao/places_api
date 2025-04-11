@@ -20,6 +20,17 @@ class PlacesService
         return Place::get();
     }
 
+    public function retrieve(int $id): Place
+    {
+        $place = Place::find($id);
+
+        if (!$place) {
+            throw new AppError("Place not found.", 404);
+        }
+
+        return $place;
+    }
+
     public function update(int $id, array $data): Place
     {
         $place = Place::find($id);
