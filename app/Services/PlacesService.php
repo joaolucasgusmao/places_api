@@ -51,12 +51,13 @@ class PlacesService
             throw new AppError("Place not found.", 404);
         }
 
-        $data['slug'] = Str::slug($data['slug']);
+        if (isset($data['slug'])) {
+            $data['slug'] = Str::slug($data['slug']);
+        }
 
         $place->update($data);
         return $place;
     }
-
 
     public function destroy(int $id): void
     {

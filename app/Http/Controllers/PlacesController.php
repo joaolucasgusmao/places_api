@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PlacesRequest;
 use App\Services\PlacesService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class PlacesController
         $this->placesService = $placesService;
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(PlacesRequest $request): JsonResponse
     {
         return response()->json($this->placesService->store($request->all()), 201);
     }
@@ -37,7 +38,7 @@ class PlacesController
         return response()->json($this->placesService->retrieve($id), 200);
     }
 
-    public function update(int $id, Request $request): JsonResponse
+    public function update(int $id, PlacesRequest $request): JsonResponse
     {
         return response()->json($this->placesService->update($id, $request->all()), 200);
     }
