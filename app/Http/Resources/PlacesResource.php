@@ -20,6 +20,8 @@ class PlacesResource extends JsonResource
             'slug' => $this->slug,
             'city' => $this->city,
             'state' => $this->state,
+            'created_at' => $this->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y H:i'),
+            'updated_at' => $this->updated_at->setTimezone('America/Sao_Paulo')->format('d/m/Y H:i'),
         ];
     }
 }

@@ -25,7 +25,7 @@ class UpdatePlaceTest extends TestCase
     {
         $place = Place::create([
             'name' => 'Old Name',
-            'slug' => 'old-name',
+            'slug' => 'Old Name',
             'city' => 'City',
             'state' => 'ST',
         ]);
