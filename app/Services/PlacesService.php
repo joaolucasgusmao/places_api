@@ -19,12 +19,12 @@ class PlacesService
 
     public function get(): AnonymousResourceCollection
     {
-        return PlacesResource::collection(Place::all());
+        return PlacesResource::collection(Place::orderBy('created_at', 'asc')->get());
     }
 
     public function getPlaceByName(string $name): AnonymousResourceCollection
     {
-        $place = Place::whereRaw('unaccent(name) ILIKE unaccent(?)', ["%$name%"])->get();
+        $place = Place::whereRaw('unaccent(name) ILIKE unaccent(?)', ["%$name%"])->orderBy("created_at", "asc")->get();
 
         if ($place->isEmpty()) {
             throw new AppError("No Places found", 404);
