@@ -3,25 +3,26 @@
 namespace App\Services;
 
 use App\Exceptions\AppError;
+use App\Http\Resources\PlacesResource;
 use App\Models\Place;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
 
 class PlacesService
 {
-    public function store(array $data): Place
+    public function store(array $data): JsonResource
     {
         $data['slug'] = Str::slug($data['slug']);
-        return Place::create($data);
+        return new PlacesResource(Place::create($data));
     }
 
-    public function get(): Collection
+    public function get(): AnonymousResourceCollection
     {
-        return Place::get();
+        return PlacesResource::collection(Place::all());
     }
 
-    public function getPlaceByName(string $name): Collection
+    public function getPlaceByName(string $name): AnonymousResourceCollection
     {
         $place = Place::whereRaw('unaccent(name) ILIKE unaccent(?)', ["%$name%"])->get();
 
@@ -29,10 +30,10 @@ class PlacesService
             throw new AppError("No Places found", 404);
         }
 
-        return $place;
+        return PlacesResource::collection($place);
     }
 
-    public function retrieve(int $id): Place
+    public function retrieve(int $id): JsonResource
     {
         $place = Place::find($id);
 
@@ -40,10 +41,10 @@ class PlacesService
             throw new AppError("Place not found.", 404);
         }
 
-        return $place;
+        return new PlacesResource($place);
     }
 
-    public function update(int $id, array $data): Place
+    public function update(int $id, array $data): JsonResource
     {
         $place = Place::find($id);
 
@@ -56,7 +57,8 @@ class PlacesService
         }
 
         $place->update($data);
-        return $place;
+
+        return new PlacesResource($place);
     }
 
     public function destroy(int $id): void
