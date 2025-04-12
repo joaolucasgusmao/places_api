@@ -15,7 +15,7 @@ class RetrievePlaceTest extends TestCase
     {
         $place = Place::create([
             'name' => 'Place Name',
-            'slug' => 'place-name',
+            'slug' => 'Place Name',
             'city' => 'City',
             'state' => 'ST',
         ]);

@@ -15,19 +15,18 @@ class UpdatePlaceTest extends TestCase
     {
         $place = Place::create([
             'name' => 'Old Name',
-            'slug' => 'old-name',
+            'slug' => 'Old Name',
             'city' => 'Old City',
             'state' => 'ST',
         ]);
 
         $response = $this->patchJson("/api/places/{$place->id}", data: [
             'name' => 'New Name',
-            'slug' => 'new-name',
+            'slug' => 'New Name',
             'city' => 'New City',
         ]);
 
-        $response->assertOk()
-                 ->assertJsonFragment(data: ['name' => 'New Name']);
+        $response->assertOk()->assertJsonFragment(data: ['name' => 'New Name']);
 
         $this->assertDatabaseHas(table: 'places', data: ['slug' => 'new-name']);
     }

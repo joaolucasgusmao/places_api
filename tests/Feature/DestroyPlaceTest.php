@@ -15,7 +15,7 @@ class DestroyPlaceTest extends TestCase
     {
         $place = Place::create([
             'name' => 'To Delete',
-            'slug' => 'to-delete',
+            'slug' => 'To Delete',
             'city' => 'City',
             'state' => 'ST',
         ]);
