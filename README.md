@@ -13,7 +13,7 @@ API RESTful desenvolvida com **Laravel** para gerenciar lugares.
 
 ## Instalação
 
-Para instalar e executar a API, siga os passos abaixo:
+Siga os passos abaixo para rodar o projeto localmente com Docker:
 
 1. Clone o repositório:
     ```bash
@@ -58,40 +58,35 @@ Para instalar e executar a API, siga os passos abaixo:
     php artisan migrate
     ```
 10. Acesse o container do **PgAdmin** e entre com seu E-mail e Senha configurados no `.env`:
-    ```bash
+    ```env
     PGADMIN_DEFAULT_EMAIL=your_email@example.com
     PGADMIN_DEFAULT_PASSWORD=your_pgadmin_password
     ```
 11. Adicione o servidor da aplicação no **PgAdmin** com as seguintes credências configuradas no `.env`
 
 -   Na aba **General**:
-    ```
-    Name: APP_NAME=Laravel
+    ```env
+    APP_NAME=Laravel
     ```
 -   Na aba **Connection**:
-    ```
-    Hostname: DB_HOST=db
-    Port: DB_PORT=5432
-    Maintenance database: postgres
-    Username: DB_USERNAME=your_db_username
-    Password: DB_PASSWORD=your_db_password
+
+    ```env
+    DB_HOST=db
+    DB_PORT=5432
+
+    DB_USERNAME=your_db_username
+    DB_PASSWORD=your_db_password
     ```
 
 12. Agora, será necessário instalar uma extensão no **Postgres** para que você possa fazer consultas SQL ignorando acentos em caracteres.
 
--   Expanda a aba **Servers**
--   Expanda a aba **Laravel**
--   Expanda a aba **Databases**
--   Expanda a aba **Laravel**
--   Expanda a aba **Schemas**
--   Expanda a aba **Public**
--   Exapanda a aba **Tables**
--   Clique com o botão direito em **places**
--   Selecione a opção **Query Tool**
--   E execute a seguinte Query:
-    ```
-    CREATE EXTENSION IF NOT EXISTS unaccent;
-    ```
+-   No PgAdmin:
+    -   Vá em **Servers > Laravel > Databases > Laravel > Schemas > Public > Tables**
+    -   Clique com o botão direito em `places` > **Query Tool**
+    -   Execute:
+        ```sql
+        CREATE EXTENSION IF NOT EXISTS unaccent;
+        ```
 
 ## Endpoints
 
@@ -149,8 +144,10 @@ Para instalar e executar a API, siga os passos abaixo:
 -   **Parâmetros**:
     -   `id`: ID do Lugar
 -   **Respostas**:
+
     -   **Código 200**: OK
     -   **Corpo**:
+
     ```json
     {
         "id": 1,
@@ -162,15 +159,50 @@ Para instalar e executar a API, siga os passos abaixo:
         "updated_at": "dd/mm/yyyy hh:mm"
     }
     ```
+
     -   **Código 404**: Not found
     -   **Corpo**:
+
     ```json
     {
         "errors": "Place not found."
     }
     ```
 
-### 4. `PATCH /api/places/{id}`
+### 4. `GET /api/places/name?name={name}`
+
+-   **Descrição**: Filtra Lugares por nome.
+-   **Parâmetros**:
+    -   `name`: **Cristo**
+-   **Respostas**:
+
+    -   **Código 200**: OK
+    -   **Corpo**:
+
+    ```json
+    [
+        {
+            "id": 1,
+            "name": "Cristo Redentor",
+            "slug": "cristo-redentor",
+            "city": "Rio de Janeiro",
+            "state": "RJ",
+            "created_at": "dd/mm/yyyy hh:mm",
+            "updated_at": "dd/mm/yyyy hh:mm"
+        }
+    ]
+    ```
+
+    -   **Código 404**: Not found
+    -   **Corpo**:
+
+    ```json
+    {
+        "errors": "No Places found."
+    }
+    ```
+
+### 5. `PATCH /api/places/{id}`
 
 -   **Descrição**: Atualiza as informações de um Lugar específico.
 -   **Parâmetros**:
@@ -206,7 +238,7 @@ Para instalar e executar a API, siga os passos abaixo:
     }
     ```
 
-### 5. `DELETE /api/places/{id}`
+### 6. `DELETE /api/places/{id}`
 
 -   **Descrição**: Exclui um Lugar específico.
 -   **Parâmetros**:
@@ -221,59 +253,26 @@ Para instalar e executar a API, siga os passos abaixo:
     }
     ```
 
-### 6. `GET /api/places/name?name={name}`
-
--   **Descrição**: Filtra Lugares por nome.
--   **Parâmetros**:
-    -   `name`: **Cristo**
--   **Respostas**:
-
-    -   **Código 200**: OK
-    -   **Corpo**:
-
-    ```json
-    [
-        {
-            "id": 1,
-            "name": "Cristo Redentor",
-            "slug": "cristo-redentor",
-            "city": "Rio de Janeiro",
-            "state": "RJ",
-            "created_at": "dd/mm/yyyy hh:mm",
-            "updated_at": "dd/mm/yyyy hh:mm"
-        }
-    ]
-    ```
-
-    -   **Código 404**: Not found
-    -   **Corpo**:
-
-    ```json
-    {
-        "errors": "No Places found."
-    }
-    ```
-
 ## Testes
 
 1. Certifique-se de que a API está rodando:
-   ```
-    docker-compose up -d
+    ```bash
+     docker-compose up -d
     ```
 2. Certifique-se de que você está com o terminal do container da aplicação aberto:
-    ```
+    ```bash
     docker-compose exec app bash
     ```
 3. Dentro do terminal da aplicação, rode:
-    ```
+    ```bash
     vendor/bin/phpunit tests
     ```
-4. Caso queria rodar os testes individualmente, execute o comando:
-    - Para Feature Tests:  
-    ```
+4. Para rodar testes de forma isolada, execute o comando:
+    - Para Feature Tests:
+    ```bash
     vendor/bin/phpunit tests/Feature
     ```
     - Para Unit Tests:
-    ```
+    ```bash
     vendor/bin/phpunit tests/Unit
     ```
