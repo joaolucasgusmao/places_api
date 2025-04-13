@@ -269,7 +269,11 @@ Para instalar e executar a API, siga os passos abaixo:
     vendor/bin/phpunit tests
     ```
 4. Caso queria rodar os testes individualmente, execute o comando:
+    - Para Feature Tests:  
     ```
     vendor/bin/phpunit tests/Feature
+    ```
+    - Para Unit Tests:
+    ```
     vendor/bin/phpunit tests/Unit
     ```
