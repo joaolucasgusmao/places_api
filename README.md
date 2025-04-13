@@ -80,6 +80,7 @@ Para instalar e executar a API, siga os passos abaixo:
 12. Agora, será necessário instalar uma extensão no **Postgres** para que você possa fazer consultas SQL ignorando acentos em caracteres.
 
 -   Expanda a aba **Servers**
+-   Expanda a aba **Laravel**
 -   Expanda a aba **Databases**
 -   Expanda a aba **Laravel**
 -   Expanda a aba **Schemas**
