@@ -232,15 +232,17 @@ Para instalar e executar a API, siga os passos abaixo:
     -   **Corpo**:
 
     ```json
-    {
-        "id": 1,
-        "name": "Cristo Redentor",
-        "slug": "cristo-redentor",
-        "city": "Rio de Janeiro",
-        "state": "RJ",
-        "created_at": "dd/mm/yyyy hh:mm",
-        "updated_at": "dd/mm/yyyy hh:mm"
-    }
+    [
+        {
+            "id": 1,
+            "name": "Cristo Redentor",
+            "slug": "cristo-redentor",
+            "city": "Rio de Janeiro",
+            "state": "RJ",
+            "created_at": "dd/mm/yyyy hh:mm",
+            "updated_at": "dd/mm/yyyy hh:mm"
+        }
+    ]
     ```
 
     -   **Código 404**: Not found
