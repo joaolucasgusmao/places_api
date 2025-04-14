@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Services\Places;
+namespace Tests\Unit;
 
 use App\Models\Place;
 use App\Services\PlacesService;

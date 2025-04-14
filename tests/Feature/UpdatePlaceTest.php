@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\PlacesController;
+namespace Tests\Feature;
 
 use App\Models\Place;
 use Illuminate\Foundation\Testing\RefreshDatabase;

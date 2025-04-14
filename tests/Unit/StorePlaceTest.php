@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Services\Places;
+namespace Tests\Unit;
 
 use App\Services\PlacesService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
